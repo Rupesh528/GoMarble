@@ -1,0 +1,84 @@
+# GoMarble : AI Engineer Assignment
+
+## Objective
+
+Develop an API server capable of extracting reviews information from any given product page (e.g., Shopify, Amazon). The API should dynamically identify CSS elements of reviews and handle pagination to retrieve all reviews.
+
+---
+
+## Assignment Tasks
+
+### 1. Programming Language
+
+- **Choice of Language**
+    - You are free to use **any programming language** you prefer for this assignment. Choose the language and tools you are most comfortable with.
+
+### 2. API Development
+
+- **Endpoint Specification**
+    - **Endpoint:** `/api/reviews?page={url}`
+    - **Method:** `GET`
+    - **Response Format:**
+        
+        ```json
+        {
+          "reviews_count": 100,
+          "reviews": [
+            {
+              "title": "Review Title",
+              "body": "Review body text",
+              "rating": 5,
+              "reviewer": "Reviewer Name"
+            },
+            ...
+          ]
+        }
+        ```
+        
+
+### 3. Functional Requirements
+
+- **Dynamic CSS Identification**
+    - Utilize Large Language Models (LLMs) to identify dynamic CSS selectors for reviews on the given product page.
+- **Pagination Handling**
+    - Implement logic to navigate through all pages of reviews to ensure complete data extraction.
+- **Universal Compatibility**
+    - The API should work with any kind of reviews page and extract relevant information accurately.
+
+### 4. Technical Requirements
+
+- **Browser Automation Frameworks**
+    - Use frameworks like **Playwright**, **Puppeteer**, or **Selenium** to simulate browser activity and interact with web pages.
+- **LLM Integration**
+    - If using a free LLM.
+
+
+## Evaluation Criteria
+
+- **Functionality**
+    - Ability to extract reviews from any product reviews page.
+    - Correct handling of pagination and dynamic content.
+- **Technical Implementation**
+    - Effective use of LLMs for dynamic CSS identification.
+    - Proper integration of browser automation tools.
+- **API Specification Compliance**
+    - Adherence to the provided API endpoint and response format.
+- **Documentation Quality**
+    - Clarity and thoroughness of the README.
+    - Quality of diagrams and explanatory content.
+- **Code Quality**
+    - Cleanliness, readability, and organization of the codebase.
+    - Appropriate use of version control with clear commit messages.
+- **Bonus Points**
+    - Successful deployment of the API server.
+    - Provision of working online API endpoints.
+    - Implementation of the Frontend UI that interacts seamlessly with the API.
+
+---
+
+## Hints
+
+- **LLM Utilization**
+    - Explore how Large Language Models can parse HTML content to identify patterns and CSS selectors dynamically.
+- **Browser Automation**
+    - Use Playwright/Selenium/Puppeteer for headless browser automation to handle rendered content and user interactions like clicking, scrolling in case of pagination

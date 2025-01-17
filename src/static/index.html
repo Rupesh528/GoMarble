@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Scraper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        input[type="url"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #results {
+            margin-top: 20px;
+            white-space: pre-wrap;
+        }
+        .loading {
+            display: none;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Review Scraper</h1>
+        <form id="scrapeForm">
+            <div>
+                <label for="url">Enter Product URL:</label>
+                <input type="url" id="url" required placeholder="https://example.com/product">
+            </div>
+            <button type="submit">Extract Reviews</button>
+        </form>
+        <div class="loading" id="loading">Extracting reviews... Please wait...</div>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        document.getElementById('scrapeForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const url = document.getElementById('url').value;
+    const loading = document.getElementById('loading');
+    const results = document.getElementById('results');
+    
+    loading.style.display = 'block';
+    results.textContent = '';
+    
+    try {
+        const response = await fetch(`/api/reviews?page=${encodeURIComponent(url)}`);
+        const data = await response.json();
+        
+        if (response.ok) {
+            results.innerHTML = `
+                <h2>Results</h2>
+                <p>Total Reviews: ${data.reviews_count}</p>
+                <h3>Reviews:</h3>
+                ${data.reviews.map(review => `
+                    <div style="border: 1px solid #ddd; padding: 10px; margin: 10px 0; border-radius: 4px;">
+                        <h4>${review.title || 'No Title'}</h4>
+                        <p><strong>Rating:</strong> ${review.rating}</p>
+                        <p><strong>Reviewer:</strong> ${review.reviewer}</p>
+                        <p>${review.text}</p>
+                    </div>
+                `).join('')}
+            `;
+        } else {
+            results.textContent = `Error: ${data.detail || 'Failed to extract reviews'}`;
+        }
+    } catch (error) {
+        results.textContent = `Error: ${error.message}`;
+    } finally {
+        loading.style.display = 'none';
+    }
+});
+    </script>
+</body>
+</html>

@@ -34,9 +34,9 @@ An API server that extracts product reviews from any e-commerce website using AI
    python -m src.main
    ```
 
-2. Make API requests:
+2. Run it on browser:
    ```bash
-   curl "http://localhost:8000/api/reviews?page=https://example.com/product"
+   http://localhost:8000
    ```
 
 ## API Specification

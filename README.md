@@ -1,7 +1,8 @@
 # Review Scraper API
 
+This works only for amazon  product page as of now !!!
 An API server that extracts product reviews from any e-commerce website using AI-powered dynamic CSS identification.
-This works only for amazon  product page !!!
+
 
 ## Features
 
